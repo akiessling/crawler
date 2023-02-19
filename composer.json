@@ -1,0 +1,24 @@
+{
+    "name": "andreaskiessling/crawler",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "symfony/string": "^5.0",
+        "spatie/crawler": "^4.6",
+        "symfony/console": "^5.0",
+        "league/csv": "^9.6",
+        "vipnytt/robotstxtparser": "^2.0",
+        "vipnytt/sitemapparser": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "AndreasKiessling\\Crawler\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andreas Kießling",
+            "email": "dev@kiessling.tech"
+        }
+    ]
+}
