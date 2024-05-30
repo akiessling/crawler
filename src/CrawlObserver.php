@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CrawlObserver extends \Spatie\Crawler\CrawlObserver
+class CrawlObserver extends \Spatie\Crawler\CrawlObservers\CrawlObserver
 {
     const UNRESPONSIVE_HOST = 'Host did not respond';
     const REDIRECT = 'Redirect';
@@ -42,14 +42,14 @@ class CrawlObserver extends \Spatie\Crawler\CrawlObserver
      *
      * @param \Psr\Http\Message\UriInterface $url
      */
-    public function willCrawl(UriInterface $url)
+    public function willCrawl(UriInterface $url): void
     {
     }
 
     /**
      * Called when the crawl has ended.
      */
-    public function finishedCrawling()
+    public function finishedCrawling(): void
     {
         $this->consoleOutput->writeln('');
         $this->consoleOutput->writeln('Crawling summary');
@@ -77,7 +77,8 @@ class CrawlObserver extends \Spatie\Crawler\CrawlObserver
         UriInterface $url,
         ResponseInterface $response,
         ?UriInterface $foundOnUrl = null
-    ) {
+    ): void
+    {
         if ($this->addRedirectedResult($url, $response, $foundOnUrl)) {
             return;
         }
@@ -95,7 +96,8 @@ class CrawlObserver extends \Spatie\Crawler\CrawlObserver
         UriInterface $url,
         RequestException $requestException,
         ?UriInterface $foundOnUrl = null
-    ) {
+    ): void
+    {
         if ($response = $requestException->getResponse()) {
             $this->crawled($url, $response, $foundOnUrl);
         } else {

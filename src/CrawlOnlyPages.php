@@ -8,7 +8,7 @@ use Spatie\Crawler\CrawlProfile;
 
 use function Symfony\Component\String\u;
 
-class CrawlOnlyPages extends CrawlProfile
+class CrawlOnlyPages extends \Spatie\Crawler\CrawlProfiles\CrawlAllUrls
 {
     protected $baseUrl;
 
@@ -24,6 +24,16 @@ class CrawlOnlyPages extends CrawlProfile
     public function shouldCrawl(UriInterface $url): bool
     {
         $path = $url->getPath();
+
+        if ($this->baseUrl->getPath()) {
+            $startPath = $this->baseUrl->getPath();
+            $pathToCrawl = $url->getPath();
+            if (!str_starts_with($pathToCrawl, $startPath)) {
+                return false;
+            }
+        }
+
+
 
         $pathinfo = pathinfo(str_replace($this->baseUrl->getHost(), '', $url));
         if($this->baseUrl->getScheme() == $url->getScheme() &&

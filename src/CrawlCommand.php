@@ -104,7 +104,7 @@ class CrawlCommand extends Command
         $clientOptions[RequestOptions::HEADERS]['user-agent'] = 'Crawler';
 
         $crawler = Crawler::create($clientOptions)
-            ->setConcurrency($input->getOption('concurrency'))
+            ->setConcurrency((int) $input->getOption('concurrency'))
             ->setDelayBetweenRequests($input->getOption('wait'))
             ->ignoreRobots()
             ->setCrawlObserver($crawlObserver)
